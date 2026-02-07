@@ -1,0 +1,18 @@
+{
+  "name": "api-rest",
+  "version": "1.0.0",
+  "description": "Criando API REST com Node.js",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "Lucas da Cunha Fabri",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^25.2.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
