@@ -42,8 +42,15 @@ export class ProductsController {
     // Validações com ZOD
     const bodySchema = z.object({
       // Objeto
-      name: z.string(),
-      price: z.number(),
+      name: z
+        .string('Name is required')
+        .trim()
+        .min(6, 'Name must be at least 6 characters'), // String, campo obrigatório, com mensagem personalizada, e com validação de mínimo de caracteres
+      // price: z.number().nullish(), // O campo price é opcional, ou seja, pode ser null ou undefined
+      price: z
+        .number('Price is required')
+        .positive('Price must be a positive number') // Number, campo obrigatório, com mensagem personalizada, e com validação de número positivo
+        // .gte(10, 'Price must be at least 10'), // Validação de número maior ou igual a 10
     });
 
     const { name, price } = bodySchema.parse(request.body);

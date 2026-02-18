@@ -24,6 +24,7 @@ app.use(routes); // Usando as rotas do arquivo index.ts
 // 400 Bad request - Client
 // 500 Internaç server error - Server
 
+// QUalquer erro da aplicação passa por aqui e a gente tem a oportunidade de tratar esse erro e enviar uma resposta mais amigável para o cliente, ou seja, para o usuário da nossa API, e também para evitar que erros do servidor sejam expostos para o cliente, o que pode ser um risco de segurança. Por exemplo, se um erro do servidor for exposto para o cliente, ele pode conter informações sensíveis sobre a estrutura do nosso código, banco de dados etc, o que pode ser explorado por atacantes. Portanto, é importante tratar os erros de forma adequada e enviar respostas apropriadas para o cliente.
 app.use(
   (error: any, request: Request, response: Response, next: NextFunction) => {
     // Verifica se o erro (error) é instancia/foi gerado pela classe AppError
@@ -33,9 +34,11 @@ app.use(
     }
 
     if (error instanceof ZodError) {
-      response
-        .status(400)
-        .json({ message: 'Valdation error!', issues: error.format() });
+      response.status(400).json({
+        message:
+          'Validation error! Check the issues property for more details.',
+        issues: error.format(), // O método format() do ZodError formata os erros de validação de uma maneira mais legível e estruturada, facilitando a identificação dos problemas de validação nos dados de entrada.
+      });
     }
 
     response.status(500).json({ message: error.message });
