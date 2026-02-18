@@ -8,9 +8,10 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "lib": ["ES2024"],
-    "module": "nodenext",
+    "module": "esnext",
     "target": "ES2024",
     "types": ["node"],
+    "moduleResolution": "bundler",
     // For nodejs:
     // "types": ["node"],
     // and npm install -D @types/node
